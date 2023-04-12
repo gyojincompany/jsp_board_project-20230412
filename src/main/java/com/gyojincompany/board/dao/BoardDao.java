@@ -58,7 +58,7 @@ public class BoardDao {
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql = "SELECT * FROM board";
+			String sql = "SELECT * FROM board ORDER BY bnum DESC";
 			
 			try {
 				Class.forName(driverName);
