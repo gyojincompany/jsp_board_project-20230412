@@ -155,5 +155,38 @@ public class BoardDao {
 			return dto;
 			
 		}
+		
+		public void delete(String bnum) {
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			
+			String sql = "DELETE FROM board WHERE bnum=?";
+			
+			int bnumInt = Integer.parseInt(bnum);//문자열을 정수로 변환
+			
+			try {
+				Class.forName(driverName);
+				conn = DriverManager.getConnection(url, username, password);
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, bnumInt);
+				
+				pstmt.executeUpdate();
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if(pstmt != null) {
+						pstmt.close();
+					}
+					if(conn != null) {
+						conn.close();
+					}
+				} catch(Exception e) {
+					e.printStackTrace();
+				}			
+			}
+		}
 
 }
